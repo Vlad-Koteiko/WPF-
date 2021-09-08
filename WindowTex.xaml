@@ -1,0 +1,65 @@
+﻿<Window x:Class="LAB_7.WindowTex"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAB_7"
+        mc:Ignorable="d"
+        Title="WindowTex" Height="400" Width="400">
+
+    <Window.Resources>
+        <Style TargetType="TextBox" >
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self},
+                            Path=(Validation.Errors)[0].ErrorContent}"/>
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+    </Window.Resources>
+
+
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Label Content="Ф.И.О. инженера" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="Тип обслуживания" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="Запчасти" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="Стоимость работы" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="Стоимость запчастей" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="20 15">
+            <Binding Path="Name_person">
+                <Binding.ValidationRules>
+                    <DataErrorValidationRule/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+        <ComboBox x:Name="combobox2" Grid.Column="1" Grid.Row="1" Margin="20 15" Text="{Binding Path=Service_type}">
+        </ComboBox>
+        <ComboBox x:Name="combobox3" Grid.Column="1" Grid.Row="2" Margin="20 15" Text="{Binding Path=Zapcasti}">
+        </ComboBox>
+        <TextBox Grid.Column="1" Grid.Row="3" Margin="20 15">
+            <Binding Path="Cost_work">
+            </Binding>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="4" Margin="20 15">
+            <Binding Path="Cost_zapcast">
+            </Binding>
+        </TextBox>
+
+        <Button Content="Принять" Grid.Row="5" Grid.ColumnSpan="2" Margin="50 10" Click="Button_Click" />
+    </Grid>
+</Window>
